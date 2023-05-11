@@ -38,10 +38,12 @@ export class AuthService {
 			password: await hash(dto.password, 10)
 		})
 
-		const tokens = await this.issueTokenPair(String(newUser._id))
+		const user = await newUser.save()
+
+		const tokens = await this.issueTokenPair(String(user._id))
 
 		return {
-			user: this.returnUserFields(newUser),
+			user: this.returnUserFields(user),
 			...tokens
 		}
 	}
