@@ -9,6 +9,7 @@ import { JwtService } from '@nestjs/jwt'
 import { hash, genSalt, compare } from 'bcryptjs'
 import { UserModel } from 'src/user/user.model'
 import { AuthDto } from './dto/auth.dto'
+import { RefreshTokenDto } from './dto/refreshToken.dto'
 
 @Injectable()
 export class AuthService {
@@ -41,6 +42,23 @@ export class AuthService {
 
 		return {
 			user: this.returnUserFields(newUser),
+			...tokens
+		}
+	}
+
+	async getNewTokens({ refreshToken }: RefreshTokenDto) {
+		if (!refreshToken)
+			throw new UnauthorizedException('Authorization required')
+
+		const isValid = await this.jwtService.verifyAsync(refreshToken)
+    console.log(isValid)
+		if (!isValid)
+			throw new UnauthorizedException('Invalid token or expired')
+
+		const user = await this.UserModel.findById(isValid._id)
+		const tokens = await this.issueTokenPair(String(user._id))
+		return {
+			user: this.returnUserFields(user),
 			...tokens
 		}
 	}
