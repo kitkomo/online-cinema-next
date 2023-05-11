@@ -17,7 +17,7 @@ export class FileController {
 	@HttpCode(200)
 	@Auth()
 	@Post('login')
-	@UseInterceptors(FileInterceptor('image'))
+	@UseInterceptors(FileInterceptor('file'))
 	async uploadFile(
 		@UploadedFile() file: Express.Multer.File,
 		@Query('folder') folder?: string
