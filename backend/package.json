@@ -1,8 +1,8 @@
 {
-  "name": "backend",
+  "name": "netflix-backend-by-kitkomo",
   "version": "0.0.1",
   "description": "",
-  "author": "",
+  "author": "Kitkomo",
   "private": true,
   "license": "UNLICENSED",
   "scripts": {
