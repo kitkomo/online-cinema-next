@@ -4,20 +4,21 @@ import {
 	Delete,
 	Get,
 	HttpCode,
+	Logger,
 	NotFoundException,
 	Param,
 	Post,
 	Put,
 	Query,
 	UsePipes,
-	ValidationPipe
+	ValidationPipe,
 } from '@nestjs/common'
-import { Auth } from 'src/auth/decorators/auth.decorator'
+import { Auth } from 'src/auth/decorators/Auth.decorator'
+import { IdValidationPipe } from 'src/pipes/id.validation.pipe'
 import { CreateGenreDto } from './dto/create-genre.dto'
-import { idValidationPipe } from 'src/pipes/idValidationPipe'
 import { GenreService } from './genre.service'
 
-@Controller('genre')
+@Controller('genres')
 export class GenreController {
 	constructor(private readonly genreService: GenreService) {}
 
@@ -43,7 +44,7 @@ export class GenreController {
 
 	@Get(':id')
 	@Auth('admin')
-	async get(@Param('id', idValidationPipe) id: string) {
+	async get(@Param('id', IdValidationPipe) id: string) {
 		return this.genreService.byId(id)
 	}
 
@@ -60,7 +61,7 @@ export class GenreController {
 	@HttpCode(200)
 	@Auth('admin')
 	async update(
-		@Param('id', idValidationPipe) id: string,
+		@Param('id', IdValidationPipe) id: string,
 		@Body() dto: CreateGenreDto
 	) {
 		const updateGenre = await this.genreService.update(id, dto)
@@ -70,7 +71,7 @@ export class GenreController {
 
 	@Delete(':id')
 	@Auth('admin')
-	async delete(@Param('id', idValidationPipe) id: string) {
+	async delete(@Param('id', IdValidationPipe) id: string) {
 		const deletedDoc = await this.genreService.delete(id)
 		if (!deletedDoc) throw new NotFoundException('Genre not found')
 	}

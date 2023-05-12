@@ -1,15 +1,17 @@
 import {
-	PipeTransform,
+	ArgumentMetadata,
 	BadRequestException,
-	ArgumentMetadata
+	PipeTransform,
 } from '@nestjs/common'
 import { Types } from 'mongoose'
 
-export class idValidationPipe implements PipeTransform {
+export class IdValidationPipe implements PipeTransform {
 	transform(val: string, meta: ArgumentMetadata) {
 		if (meta.type !== 'param') return val
+
 		if (!Types.ObjectId.isValid(val))
-			throw new BadRequestException('Invalid format id')
+			throw new BadRequestException('Invalid format Id')
+
 		return val
 	}
 }

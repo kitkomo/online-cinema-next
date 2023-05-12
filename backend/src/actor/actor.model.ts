@@ -1,5 +1,5 @@
 import { prop } from '@typegoose/typegoose'
-import { TimeStamps, Base } from '@typegoose/typegoose/lib/defaultClasses'
+import { Base, TimeStamps } from '@typegoose/typegoose/lib/defaultClasses'
 
 export interface ActorModel extends Base {}
 
@@ -7,9 +7,9 @@ export class ActorModel extends TimeStamps {
 	@prop()
 	name: string
 
-	@prop({ unique: true })
-	slug: string
-
 	@prop()
 	photo: string
+
+	@prop({ unique: true })
+	slug: string
 }

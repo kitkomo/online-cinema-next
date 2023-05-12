@@ -1,23 +1,23 @@
 import { Module } from '@nestjs/common'
-import { GenreService } from './genre.service'
-import { GenreController } from './genre.controller'
 import { TypegooseModule } from 'nestjs-typegoose'
-import { ConfigModule } from '@nestjs/config'
+import { MovieModule } from 'src/movie/movie.module'
+import { GenreController } from './genre.controller'
 import { GenreModel } from './genre.model'
+import { GenreService } from './genre.service'
 
 @Module({
+	controllers: [GenreController],
 	imports: [
 		TypegooseModule.forFeature([
 			{
 				typegooseClass: GenreModel,
 				schemaOptions: {
-					collection: 'Genre'
-				}
-			}
+					collection: 'Genre',
+				},
+			},
 		]),
-		ConfigModule
+		MovieModule,
 	],
 	providers: [GenreService],
-	controllers: [GenreController]
 })
 export class GenreModule {}
