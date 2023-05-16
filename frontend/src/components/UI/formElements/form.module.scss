@@ -18,7 +18,7 @@
 	@apply text-left mb-8;
 
 	input {
-		@apply outline-border-none focus:ring-0 bg-transparent text-gray-500 w-full m-0 px-0;
+		@apply outline-border-none focus:ring-0 bg-transparent text-gray-500 w-full m-0 px-0 border-none;
 	}
 }
 
