@@ -10,7 +10,6 @@ import LogoutButton from './LogoutButton'
 
 const AuthItems: FC = () => {
 	const { user } = useAuth()
-
 	return (
 		<>
 			{user ? (
@@ -37,7 +36,7 @@ const AuthItems: FC = () => {
 				<MenuItem
 					item={{
 						icon: 'MdOutlineLock',
-						link: getAdminHomeUrl(),
+						link: `/${getAdminHomeUrl()}`,
 						title: 'Admin panel'
 					}}
 				/>
