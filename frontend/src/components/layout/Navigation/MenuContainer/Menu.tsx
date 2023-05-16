@@ -14,7 +14,7 @@ const Menu: FC<{menu: IMenu}> = ({menu: {items, title}}) => {
 						<MenuItem item={item} key={item.link}/>
 					))
 				}
-				{title === 'General' ? <AuthItems/> : null}
+				{title === 'General' ? <AuthItems/> : ''}
 			</ul>
 			</div>
 	)
