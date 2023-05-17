@@ -11,7 +11,7 @@ const AdminNavItem: FC<{ item: INavItem }> = ({ item: { link, title } }) => {
 	return (
 		<li>
 			<Link
-				href={link}
+				href={`/${link}`}
 				className={cn({
 					[cl.active]: asPath === `/${link}`
 				})}
