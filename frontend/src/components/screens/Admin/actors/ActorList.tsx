@@ -7,24 +7,24 @@ import Heading from '@/components/UI/heading/Heading'
 
 import Meta from '@/utils/meta/Meta'
 
-import { useUsers } from './useUsers'
+import { useActors } from './useActors'
 
-const UserList: FC = () => {
-	const { handleSearch, searchTerm, isLoading, data, deleteAsync } = useUsers()
+const ActorList: FC = () => {
+	const { handleSearch, searchTerm, isLoading, data, deleteAsync } = useActors()
 
 	return (
-		<Meta title="Users">
+		<Meta title="Actors">
 			<AdminNavigation />
-			<Heading title="Users" />
+			<Heading title="Actors" />
 			<AdminHeader handleSearch={handleSearch} searchTerm={searchTerm} />
 			<AdminTable
 				isLoading={isLoading}
 				removeHandler={deleteAsync}
-				headerItems={['Email', 'Date register']}
+				headerItems={['Name', 'Count Movies']}
 				tableItems={data || []}
 			/>
 		</Meta>
 	)
 }
 
-export default UserList
+export default ActorList
