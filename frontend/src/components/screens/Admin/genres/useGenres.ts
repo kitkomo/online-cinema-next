@@ -11,11 +11,12 @@ import { GenreService } from '@/services/genre.service'
 import { toastrError } from '@/utils/toastr.error'
 
 import { getAdminUrl } from '@/configs/url.config'
+import { useRouter } from 'next/router'
 
 export const useGenres = () => {
 	const [searchTerm, setSearchTerm] = useState('')
 	const debouncedSearch = useDebounce(searchTerm, 500)
-
+const {push} = useRouter()
 	const queryData = useQuery(
 		['genres-list', debouncedSearch],
 		() => GenreService.getAll(debouncedSearch),
@@ -24,7 +25,7 @@ export const useGenres = () => {
 				data.map(
 					(genre): ITableItem => ({
 						_id: genre._id,
-						editUrl: getAdminUrl(`genres/edit/${genre._id}`),
+						editUrl: getAdminUrl(`genre/edit/${genre._id}`),
 						items: [genre.name, genre.slug]
 					})
 				),
@@ -36,6 +37,20 @@ export const useGenres = () => {
 
 	const handleSearch = (e: ChangeEvent<HTMLInputElement>) =>
 		setSearchTerm(e.target.value)
+
+	const { mutateAsync: createAsync } = useMutation(
+		'create-genre',
+		() => GenreService.createGenre(),
+		{
+			onError: (error) => {
+				toastrError(error, 'Create genre')
+			},
+			onSuccess: ({data: _id}) => {
+				toastr.success('Create genre', 'genre successfully created')
+				push(`genre/edit/${_id}`)
+			}
+		}
+	)
 
 	const { mutateAsync: deleteAsync } = useMutation(
 		'delete-genre',
@@ -56,8 +71,9 @@ export const useGenres = () => {
 			handleSearch,
 			...queryData,
 			searchTerm,
-			deleteAsync
+			deleteAsync,
+			createAsync
 		}),
-		[queryData, searchTerm, deleteAsync]
+		[queryData, searchTerm, deleteAsync, createAsync]
 	)
 }

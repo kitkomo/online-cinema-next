@@ -20,17 +20,17 @@ const TextEditor: FC<ITextEditor> = ({
 	const [isUpdated, setIsUpdated] = useState(false)
 
 	useEffect(() => {
-		if (!isUpdated) return
-		const defaultValue = value || ''
-		const blocksFromHtml = htmlToDraft(defaultValue)
-		const contentState = ContentState.createFromBlockArray(
-			blocksFromHtml.contentBlocks,
-			blocksFromHtml.entityMap
-		)
-
-		const newEditorState = EditorState.createWithContent(contentState)
-		setEditorState(newEditorState)
-	}, [isUpdated, value])
+		if (!isUpdated) {
+			const defaultValue = value ? value : ''
+			const blocksFromHtml = htmlToDraft(defaultValue)
+			const contentState = ContentState.createFromBlockArray(
+				blocksFromHtml.contentBlocks,
+				blocksFromHtml.entityMap
+			)
+			const newEditorState = EditorState.createWithContent(contentState)
+			setEditorState(newEditorState)
+		}
+	}, [value, isUpdated])
 
 	const onEditorStateChange = (editorState: EditorState) => {
 		setIsUpdated(true)
@@ -59,7 +59,7 @@ const TextEditor: FC<ITextEditor> = ({
 								dropdownClassName: undefined,
 								options: ['bold', 'italic', 'underline', 'strikethrough']
 							},
-						
+
 							list: {
 								inDrodown: false,
 								options: ['unordered', 'ordered']
