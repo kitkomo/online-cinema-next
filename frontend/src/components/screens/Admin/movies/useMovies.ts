@@ -13,10 +13,12 @@ import { toastrError } from '@/utils/toastr.error'
 
 import { getAdminUrl } from '@/configs/url.config'
 import { getGenresList } from '@/utils/movie/getGenresListEach'
+import { useRouter } from 'next/router'
 
 export const useMovies = () => {
 	const [searchTerm, setSearchTerm] = useState('')
 	const debouncedSearch = useDebounce(searchTerm, 500)
+	const {push} = useRouter()
 
 	const queryData = useQuery(
 		['movies-list', debouncedSearch],
@@ -32,6 +34,20 @@ export const useMovies = () => {
 				),
 			onError: (error) => {
 				toastrError(error, 'Movie list')
+			}
+		}
+	)
+
+	const { mutateAsync: createAsync } = useMutation(
+		'create-genre',
+		() => MovieService.createMovie(),
+		{
+			onError: (error) => {
+				toastrError(error, 'Create genre')
+			},
+			onSuccess: ({data: _id}) => {
+				toastr.success('Create movie', 'movie successfully created')
+				push(`movie/edit/${_id}`)
 			}
 		}
 	)
@@ -58,8 +74,9 @@ export const useMovies = () => {
 			handleSearch,
 			...queryData,
 			searchTerm,
-			deleteAsync
+			deleteAsync,
+			createAsync
 		}),
-		[queryData, searchTerm, deleteAsync]
+		[queryData, searchTerm, deleteAsync, createAsync]
 	)
 }
