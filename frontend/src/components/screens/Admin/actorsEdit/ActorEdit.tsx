@@ -19,13 +19,6 @@ import Heading from '../../../UI/heading/Heading'
 import { IActorEditInput } from './actor-edit.interface'
 import { useActorEdit } from './useActorEdit'
 
-const DynamicTextEditor = dynamic(
-	() => import('@/components/UI/formElements/TextEditor'),
-	{
-		ssr: false
-	}
-)
-
 const ActorEdit: FC = () => {
 	const {
 		handleSubmit,

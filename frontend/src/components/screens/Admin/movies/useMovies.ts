@@ -28,7 +28,7 @@ export const useMovies = () => {
 				data.map(
 					(movie): ITableItem => ({
 						_id: movie._id,
-						editUrl: getAdminUrl(`movies/edit/${movie._id}`),
+						editUrl: `movie/edit/${movie._id}`,
 						items: [movie.title, getGenresList(movie.genres),String(movie.rating)]
 					})
 				),
