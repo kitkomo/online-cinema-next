@@ -8,14 +8,13 @@ import { IGalleryItemProps } from './gallery.interface'
 
 const GalleryItem: FC<IGalleryItemProps> = ({ item, variant }) => {
 	return (
-		<Link href={item.link}>
-			<a
-				className={cn(cl.item, {
+		<Link href={item.link} className={cn(cl.item, {
 					[cl.withText]: item.content,
 					[cl.horizontal]: variant === 'horizontal',
 					[cl.vertical]: variant === 'vertical',
-				})}
-			>
+				})}>
+				
+	
 				<Image
 					alt={item.name}
 					src={item.posterPath}
@@ -30,7 +29,7 @@ const GalleryItem: FC<IGalleryItemProps> = ({ item, variant }) => {
 						)}
 					</div>
 				)}
-			</a>
+		
 		</Link>
 	)
 }

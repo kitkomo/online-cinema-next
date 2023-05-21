@@ -33,7 +33,7 @@ const PopularMovie: FC = () => {
 					<>
 						<h3>Opened {movie.countOpened} times</h3>
 						<Link href={getMovieUrl(movie.slug)}>
-							<a>
+							
 								<Image
 									width={285}
 									height={176}
@@ -42,7 +42,7 @@ const PopularMovie: FC = () => {
 									className={cl.image}
 									unoptimized
 								/>
-							</a>
+							
 						</Link>
 					</>
 				)
