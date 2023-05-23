@@ -4,8 +4,8 @@ export const staticMenu: IMenu = {
 	title: 'Menu',
 	items: [
 		{ icon: 'MdHome', link: '/', title: 'Home' },
-		{ icon: 'MdExplore', link: '/genres', title: 'Discovery' },
-		{ icon: 'MdRefresh', link: '/fresh', title: 'New movies' },
+		{ icon: 'MdExplore', link: '/discovery', title: 'Discovery' },
+		{ icon: 'MdRefresh', link: '/new-movies', title: 'New movies' },
 		{ icon: 'MdLocalFireDepartment', link: '/trending', title: 'Trending now' }
 	]
 }

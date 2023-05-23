@@ -13,7 +13,7 @@ const Home: FC<IHome> = ({ slides, actors, trendingMovies }) => {
 	return (
 		<Meta
 			title="Watch movies online"
-			description="Watch movies online and TV shows right from your browser"
+			description="Watch movies online in best quality Full HD 720 and 1080. The best movies is already in the Netflix online cinema!"
 		>
 			<Heading
 				title="Watch movies online"

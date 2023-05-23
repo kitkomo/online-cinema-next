@@ -19,7 +19,8 @@ export const useUserEdit = (setValue: UseFormSetValue<IUserEditInput>) => {
 		() => UserService.getById(userId),
 		{
 			onSuccess({ data }) {
-				
+				setValue('email', data.email)
+				setValue('isAdmin', data.isAdmin)
 			},
 			onError(error) {
 				toastrError(error, 'Get user')

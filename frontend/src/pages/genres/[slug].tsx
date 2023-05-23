@@ -7,18 +7,22 @@ import { IGenre, IMovie } from '@/shared/types/movie.types'
 import { GenreService } from '@/services/genre.service'
 import { MovieService } from '@/services/movie.service'
 
+
 interface IGenrePage {
 	movies: IMovie[]
 	genre: IGenre
 }
 
 const GenrePage: NextPage<IGenrePage> = ({ movies, genre }) => {
+	
 	return (
-		<Catalog
+	
+	<Catalog
 			movies={movies || []}
 			title={genre.name}
 			description={genre.description}
-		/>
+		/> 
+	
 	)
 }
 
