@@ -2,7 +2,7 @@ import { FC } from 'react'
 
 import SkeletonLoader from '../../skeleton-loader/SkeletonLoader'
 
-import styles from './AdminTable.module.scss'
+import cl from './AdminTable.module.scss'
 import AdminTableHeader from './AdminTableHeader'
 import AdminTableItem from './AdminTableItem'
 import { ITableItem } from './admin-table.interface'
@@ -18,7 +18,7 @@ const AdminTable: FC<IAdminTable> = ({
 	tableItems,
 	headerItems,
 	isLoading,
-	removeHandler,
+	removeHandler
 }) => {
 	return (
 		<div>
@@ -35,7 +35,7 @@ const AdminTable: FC<IAdminTable> = ({
 					/>
 				))
 			) : (
-				<div className={styles.notFound}>Elements not found</div>
+				<div className={cl.notFound}>Elements not found</div>
 			)}
 		</div>
 	)

@@ -6,7 +6,7 @@ import SkeletonLoader from '@/components/ui/skeleton-loader/SkeletonLoader'
 
 import { AdminService } from '@/services/admin/admin.service'
 
-import styles from '../Admin.module.scss'
+import cl from '../Admin.module.scss'
 
 const CountUsers: FC = () => {
 	const { isLoading, data: response } = useQuery('Count users', () =>
@@ -14,14 +14,14 @@ const CountUsers: FC = () => {
 	)
 
 	return (
-		<div className={cn(styles.block, styles.countUsers)}>
+		<div className={cn(cl.block, cl.countUsers)}>
 			<div>
 				{isLoading ? (
 					<SkeletonLoader />
 				) : (
-					<div className={styles.number}>{response?.data}</div>
+					<div className={cl.number}>{response?.data}</div>
 				)}
-				<div className={styles.description}>users</div>
+				<div className={cl.description}>users</div>
 			</div>
 		</div>
 	)

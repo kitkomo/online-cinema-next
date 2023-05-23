@@ -1,4 +1,3 @@
-import styles from './Auth.module.scss'
 import { FC, useState } from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form'
 
@@ -11,6 +10,7 @@ import { useAuth } from '@/hooks/useAuth'
 
 import { Meta } from '@/utils/meta'
 
+import cl from './Auth.module.scss'
 import { IAuthInput } from './auth.interface'
 import { useAuthRedirect } from './useAuthRedirect'
 
@@ -25,9 +25,9 @@ const Auth: FC = () => {
 		register: registerInput,
 		handleSubmit,
 		formState,
-		reset,
+		reset
 	} = useForm<IAuthInput>({
-		mode: 'onChange',
+		mode: 'onChange'
 	})
 
 	const { login, register } = useActions()
@@ -41,12 +41,12 @@ const Auth: FC = () => {
 
 	return (
 		<Meta title="Auth">
-			<section className={styles.wrapper}>
+			<section className={cl.wrapper}>
 				<form onSubmit={handleSubmit(onSubmit)}>
 					<Heading title="Auth" className="mb-6" />
 					<AuthFields register={registerInput} formState={formState} />
 
-					<div className={styles.buttons}>
+					<div className={cl.buttons}>
 						<Button
 							type="submit"
 							onClick={() => setType('login')}

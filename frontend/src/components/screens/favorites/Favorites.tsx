@@ -8,7 +8,7 @@ import { Meta } from '@/utils/meta'
 import { getMovieUrl } from '@/configs/url.config'
 
 import FavoriteItem from './FavoriteItem'
-import styles from './Favorites.module.scss'
+import cl from './Favorites.module.scss'
 import { useFavorites } from './useFavorites'
 
 const Favorites: FC = () => {
@@ -17,12 +17,12 @@ const Favorites: FC = () => {
 	return (
 		<Meta title="Favorites">
 			<Heading title={'Favorites'} />
-			<section className={styles.favorites}>
+			<section className={cl.favorites}>
 				{isLoading ? (
 					<SkeletonLoader
 						count={3}
-						className={styles.skeletonLoader}
-						containerClassName={styles.containerLoader}
+						className={cl.skeletonLoader}
+						containerClassName={cl.containerLoader}
 					/>
 				) : (
 					favoritesMovies?.map((movie) => (
@@ -33,7 +33,7 @@ const Favorites: FC = () => {
 								posterPath: movie.bigPoster,
 								url: getMovieUrl(movie.slug),
 								title: movie.title,
-								_id: movie._id,
+								_id: movie._id
 							}}
 						/>
 					))

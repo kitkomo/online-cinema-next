@@ -2,7 +2,7 @@ import dynamic from 'next/dynamic'
 import { FC } from 'react'
 import { Controller, useForm } from 'react-hook-form'
 
-import formStyles from '@/components/shared/admin/adminForm.module.scss'
+import formcl from '@/components/shared/admin/adminForm.module.scss'
 
 import AdminNavigation from '@/ui/admin-navigation/AdminNavigation'
 import Button from '@/ui/form-elements/Button'
@@ -21,7 +21,7 @@ import { useAdminGenres } from './useAdminGenres'
 import { useMovieEdit } from './useMovieEdit'
 
 const DynamicSelect = dynamic(() => import('@/ui/select/Select'), {
-	ssr: false,
+	ssr: false
 })
 
 const MovieEdit: FC = () => {
@@ -31,9 +31,9 @@ const MovieEdit: FC = () => {
 		formState: { errors },
 		control,
 		setValue,
-		getValues,
+		getValues
 	} = useForm<IMovieEditInput>({
-		mode: 'onChange',
+		mode: 'onChange'
 	})
 
 	const { onSubmit, isLoading } = useMovieEdit(setValue)
@@ -47,11 +47,11 @@ const MovieEdit: FC = () => {
 			{isLoading ? (
 				<SkeletonLoader count={5} />
 			) : (
-				<form onSubmit={handleSubmit(onSubmit)} className={formStyles.form}>
-					<div className={formStyles.fields}>
+				<form onSubmit={handleSubmit(onSubmit)} className={formcl.form}>
+					<div className={formcl.fields}>
 						<Field
 							{...register('title', {
-								required: 'Title is required!',
+								required: 'Title is required!'
 							})}
 							placeholder="Title"
 							error={errors.title}
@@ -65,7 +65,7 @@ const MovieEdit: FC = () => {
 						/>
 						<Field
 							{...register('parameters.country', {
-								required: 'Country is required!',
+								required: 'Country is required!'
 							})}
 							placeholder="Country"
 							error={errors.parameters?.country}
@@ -73,7 +73,7 @@ const MovieEdit: FC = () => {
 						/>
 						<Field
 							{...register('parameters.duration', {
-								required: 'Duration is required!',
+								required: 'Duration is required!'
 							})}
 							placeholder="Duration (min.)"
 							error={errors.parameters?.duration}
@@ -81,7 +81,7 @@ const MovieEdit: FC = () => {
 						/>
 						<Field
 							{...register('parameters.year', {
-								required: 'Year is required!',
+								required: 'Year is required!'
 							})}
 							placeholder="Year"
 							error={errors.parameters?.year}
@@ -92,7 +92,7 @@ const MovieEdit: FC = () => {
 							name="genres"
 							control={control}
 							rules={{
-								required: 'Please select at least one genre!',
+								required: 'Please select at least one genre!'
 							}}
 							render={({ field, fieldState: { error } }) => (
 								<DynamicSelect
@@ -109,7 +109,7 @@ const MovieEdit: FC = () => {
 							name="actors"
 							control={control}
 							rules={{
-								required: 'Please select at least one actor!',
+								required: 'Please select at least one actor!'
 							}}
 							render={({ field, fieldState: { error } }) => (
 								<DynamicSelect
@@ -129,7 +129,7 @@ const MovieEdit: FC = () => {
 							defaultValue=""
 							render={({
 								field: { value, onChange },
-								fieldState: { error },
+								fieldState: { error }
 							}) => (
 								<UploadField
 									placeholder="Poster"
@@ -140,7 +140,7 @@ const MovieEdit: FC = () => {
 								/>
 							)}
 							rules={{
-								required: 'Poster is required!',
+								required: 'Poster is required!'
 							}}
 						/>
 
@@ -150,7 +150,7 @@ const MovieEdit: FC = () => {
 							defaultValue=""
 							render={({
 								field: { value, onChange },
-								fieldState: { error },
+								fieldState: { error }
 							}) => (
 								<UploadField
 									placeholder="Big poster"
@@ -161,7 +161,7 @@ const MovieEdit: FC = () => {
 								/>
 							)}
 							rules={{
-								required: 'Big poster is required!',
+								required: 'Big poster is required!'
 							}}
 						/>
 
@@ -171,7 +171,7 @@ const MovieEdit: FC = () => {
 							defaultValue=""
 							render={({
 								field: { value, onChange },
-								fieldState: { error },
+								fieldState: { error }
 							}) => (
 								<UploadField
 									placeholder="Video"
@@ -184,7 +184,7 @@ const MovieEdit: FC = () => {
 								/>
 							)}
 							rules={{
-								required: 'Video is required!',
+								required: 'Video is required!'
 							}}
 						/>
 					</div>

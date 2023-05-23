@@ -5,7 +5,7 @@ import { FC } from 'react'
 
 import { MaterialIcon } from '@/ui/icons/MaterialIcon'
 
-import styles from './Menu.module.scss'
+import cl from './Menu.module.scss'
 import { IMenuItem } from './menu.types'
 
 const MenuItem: FC<{ item: IMenuItem }> = ({ item }) => {
@@ -14,14 +14,12 @@ const MenuItem: FC<{ item: IMenuItem }> = ({ item }) => {
 	return (
 		<li
 			className={cn({
-				[styles.active]: asPath === item.link,
+				[cl.active]: asPath === item.link
 			})}
 		>
 			<Link href={item.link}>
-			
-					<MaterialIcon name={item.icon} />
-					<span>{item.title}</span>
-		
+				<MaterialIcon name={item.icon} />
+				<span>{item.title}</span>
 			</Link>
 		</li>
 	)

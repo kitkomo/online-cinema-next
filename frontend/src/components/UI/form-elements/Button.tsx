@@ -1,12 +1,13 @@
 import cn from 'classnames'
 import { FC } from 'react'
 
+
+import cl from './form.module.scss'
 import { IButton } from './form.interface'
-import styles from './form.module.scss'
 
 const Button: FC<IButton> = ({ children, className, ...rest }) => {
 	return (
-		<button className={cn(styles.button, className)} {...rest}>
+		<button className={cn(cl.button, className)} {...rest}>
 			{children}
 		</button>
 	)

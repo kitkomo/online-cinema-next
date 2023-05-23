@@ -1,19 +1,19 @@
 import dynamic from 'next/dynamic'
 import { FC } from 'react'
 
-import styles from './Menu.module.scss'
+import cl from './Menu.module.scss'
 import MenuItem from './MenuItem'
 import { IMenu } from './menu.types'
 
 const DynamicAuthItems = dynamic(() => import('./auth/AuthItems'), {
-	ssr: false,
+	ssr: false
 })
 
 const Menu: FC<{ menu: IMenu }> = ({ menu: { items, title } }) => {
 	return (
-		<div className={styles.menu}>
-			<div className={styles.heading}>{title}</div>
-			<ul className={styles.ul}>
+		<div className={cl.menu}>
+			<div className={cl.heading}>{title}</div>
+			<ul className={cl.ul}>
 				{items.map((item) => (
 					<MenuItem key={item.link} item={item} />
 				))}

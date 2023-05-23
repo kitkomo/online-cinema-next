@@ -3,17 +3,17 @@ import { forwardRef } from 'react'
 
 import { IField } from './form.interface'
 
-import styles from './form.module.scss'
+import cl from './form.module.scss'
 
 const Field = forwardRef<HTMLInputElement, IField>(
 	({ placeholder, error, type = 'text', style, ...rest }, ref) => {
 		return (
-			<div className={cn(styles.common, styles.field)} style={style}>
+			<div className={cn(cl.common, cl.field)} style={style}>
 				<label>
 					<span>{placeholder}</span>
 					<input ref={ref} type={type} {...rest} />
 				</label>
-				{error && <div className={styles.error}>{error.message}</div>}
+				{error && <div className={cl.error}>{error.message}</div>}
 			</div>
 		)
 	}

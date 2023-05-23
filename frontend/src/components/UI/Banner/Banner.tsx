@@ -1,7 +1,7 @@
 import Image from 'next/image'
 import React, { FC } from 'react'
 
-import styles from './Banner.module.scss'
+import cl from './Banner.module.scss'
 
 interface IBanner {
 	imagePath: string
@@ -10,7 +10,7 @@ interface IBanner {
 
 const Banner: FC<IBanner> = ({ imagePath, Detail }) => {
 	return (
-		<div className={styles.banner}>
+		<div className={cl.banner}>
 			<Image
 				alt=""
 				src={imagePath}

@@ -3,7 +3,7 @@ import { FC } from 'react'
 
 import { MaterialIcon } from '../../../icons/MaterialIcon'
 
-import styles from './AdminActions.module.scss'
+import cl from './AdminActions.module.scss'
 
 interface IAdminActions {
 	editUrl: string
@@ -14,7 +14,7 @@ const AdminActions: FC<IAdminActions> = ({ editUrl, removeHandler }) => {
 	const { push } = useRouter()
 
 	return (
-		<div className={styles.actions}>
+		<div className={cl.actions}>
 			<button onClick={() => push(editUrl)}>
 				<MaterialIcon name="MdEdit" />
 			</button>

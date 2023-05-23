@@ -8,18 +8,18 @@ import { Meta } from '@/utils/meta'
 
 import { getMovieUrl } from '@/configs/url.config'
 
-import styles from './Catalog.module.scss'
+import cl from './Catalog.module.scss'
 import { ICatalog } from './catalog.types'
 
 const Catalog: FC<ICatalog> = ({ title, description, movies }) => {
 	return (
 		<Meta title={title} description={description}>
-			<Heading title={title} className={styles.heading} />
+			<Heading title={title} className={cl.heading} />
 			{description && (
-				<Description text={description} className={styles.description} />
+				<Description text={description} className={cl.description} />
 			)}
 
-			<section className={styles.movies}>
+			<section className={cl.movies}>
 				{movies.map((movie) => (
 					<GalleryItem
 						key={movie._id}
@@ -29,15 +29,15 @@ const Catalog: FC<ICatalog> = ({ title, description, movies }) => {
 							posterPath: movie.bigPoster,
 							url: getMovieUrl(movie.slug),
 							content: {
-								title: movie.title,
-							},
+								title: movie.title
+							}
 						}}
 					/>
 				))}
 			</section>
 
 			{/* <div className="text-center">
-				<button className={styles.button}>Load more</button>
+				<button className={cl.button}>Load more</button>
 			</div> */}
 		</Meta>
 	)

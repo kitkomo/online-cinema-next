@@ -1,15 +1,14 @@
-import { FC } from 'react'
+import { FC, ReactNode } from 'react'
 
-import Sidebar from './Sidebar/Sidebar'
+import cl from './Layout.module.scss'
 import Navigation from './Navigation/Navigation'
+import Sidebar from './Sidebar/Sidebar'
 
-import styles from './Layout.module.scss'
-
-const Layout: FC = ({ children }) => {
+const Layout: FC<{children: ReactNode}> = ({ children }) => {
 	return (
-		<div className={styles.layout}>
+		<div className={cl.layout}>
 			<Navigation />
-			<div className={styles.center}>{children}</div>
+			<div className={cl.center}>{children}</div>
 			<Sidebar />
 		</div>
 	)

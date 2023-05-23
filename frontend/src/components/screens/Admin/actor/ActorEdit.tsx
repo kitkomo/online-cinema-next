@@ -1,9 +1,7 @@
-import { IActorEditInput } from './actor-edit.interface'
-import { useActorEdit } from './useActorEdit'
 import { FC } from 'react'
 import { Controller, useForm } from 'react-hook-form'
 
-import formStyles from '@/components/shared/admin/adminForm.module.scss'
+import formcl from '@/components/shared/admin/adminForm.module.scss'
 import SlugField from '@/components/ui/form-elements/SlugField/SlugField'
 import UploadField from '@/components/ui/form-elements/UploadField/UploadField'
 import SkeletonLoader from '@/components/ui/skeleton-loader/SkeletonLoader'
@@ -16,6 +14,9 @@ import Heading from '@/ui/heading/Heading'
 import { Meta } from '@/utils/meta'
 import generateSlug from '@/utils/string/generateSlug'
 
+import { IActorEditInput } from './actor-edit.interface'
+import { useActorEdit } from './useActorEdit'
+
 const ActorEdit: FC = () => {
 	const {
 		handleSubmit,
@@ -23,9 +24,9 @@ const ActorEdit: FC = () => {
 		formState: { errors },
 		setValue,
 		getValues,
-		control,
+		control
 	} = useForm<IActorEditInput>({
-		mode: 'onChange',
+		mode: 'onChange'
 	})
 
 	const { isLoading, onSubmit } = useActorEdit(setValue)
@@ -37,11 +38,11 @@ const ActorEdit: FC = () => {
 			{isLoading ? (
 				<SkeletonLoader count={3} />
 			) : (
-				<form onSubmit={handleSubmit(onSubmit)} className={formStyles.form}>
-					<div className={formStyles.fields}>
+				<form onSubmit={handleSubmit(onSubmit)} className={formcl.form}>
+					<div className={formcl.fields}>
 						<Field
 							{...register('name', {
-								required: 'Name is required!',
+								required: 'Name is required!'
 							})}
 							placeholder="Name"
 							error={errors.name}
@@ -57,7 +58,7 @@ const ActorEdit: FC = () => {
 							defaultValue=""
 							render={({
 								field: { value, onChange },
-								fieldState: { error },
+								fieldState: { error }
 							}) => (
 								<UploadField
 									placeholder="Photo"
@@ -68,7 +69,7 @@ const ActorEdit: FC = () => {
 								/>
 							)}
 							rules={{
-								required: 'Photo is required!',
+								required: 'Photo is required!'
 							}}
 						/>
 					</div>

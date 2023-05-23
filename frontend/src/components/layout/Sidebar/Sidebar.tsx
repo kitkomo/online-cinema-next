@@ -2,12 +2,11 @@ import { FC } from 'react'
 
 import MoviesContainer from './MoviesContainer/MoviesContainer'
 import Search from './Search/Search'
-
-import styles from './Sidebar.module.scss'
+import cl from './Sidebar.module.scss'
 
 const Sidebar: FC = () => {
 	return (
-		<div className={styles.sidebar}>
+		<div className={cl.sidebar}>
 			<Search />
 			<MoviesContainer />
 		</div>

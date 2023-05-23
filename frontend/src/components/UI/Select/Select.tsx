@@ -2,9 +2,9 @@ import { FC } from 'react'
 import ReactSelect, { OnChangeValue } from 'react-select'
 import makeAnimated from 'react-select/animated'
 
-import formStyles from '../form-elements/form.module.scss'
+import formcl from '../form-elements/form.module.scss'
 
-import styles from './Select.module.scss'
+import cl from './Select.module.scss'
 import { IOption, ISelect } from './select.interface'
 
 const animatedComponents = makeAnimated()
@@ -15,7 +15,7 @@ const Select: FC<ISelect> = ({
 	isMulti,
 	options,
 	field,
-	isLoading,
+	isLoading
 }) => {
 	const onChange = (newValue: OnChangeValue<IOption, boolean>) => {
 		field.onChange(
@@ -36,7 +36,7 @@ const Select: FC<ISelect> = ({
 	}
 
 	return (
-		<div className={styles.selectContainer}>
+		<div className={cl.selectContainer}>
 			<label>
 				<span>{placeholder}</span>
 				<ReactSelect
@@ -50,7 +50,7 @@ const Select: FC<ISelect> = ({
 					isLoading={isLoading}
 				/>
 			</label>
-			{error && <div className={formStyles.error}>{error.message}</div>}
+			{error && <div className={formcl.error}>{error.message}</div>}
 		</div>
 	)
 }

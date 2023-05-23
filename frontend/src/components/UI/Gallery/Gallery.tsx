@@ -1,15 +1,14 @@
 import { FC } from 'react'
 
-import { IGalleryItem } from './gallery.types'
+import cl from './Gallery.module.scss'
 import GalleryItem from './GalleryItem'
-
-import styles from './Gallery.module.scss'
+import { IGalleryItem } from './gallery.types'
 
 const Gallery: FC<{ items: IGalleryItem[] }> = ({ items }) => {
 	return (
-		<div className={styles.gallery}>
-			{items.map(item => (
-				<GalleryItem key={item.url} item={item} variant='vertical' />
+		<div className={cl.gallery}>
+			{items.map((item) => (
+				<GalleryItem key={item.url} item={item} variant="vertical" />
 			))}
 		</div>
 	)

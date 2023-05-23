@@ -8,35 +8,34 @@ import { getGenresListEach } from '@/utils/movie/getGenresList'
 
 import { getGenreUrl, getMovieUrl } from '@/configs/url.config'
 
-import styles from './MovieList.module.scss'
+import cl from './MovieList.module.scss'
 import { IWidgetMovie } from './movie.types'
 
 const MovieItem: FC<{ movie: IWidgetMovie }> = ({ movie }) => {
 	return (
-		<div className={styles.item}>
+		<div className={cl.item}>
 			<Link href={getMovieUrl(movie.slug)}>
-<Image
-						alt={movie.title}
-						width={65}
-						height={97}
-						src={movie.poster}
-						draggable={false}
-						priority
-					/>
-	
+				<Image
+					alt={movie.title}
+					width={65}
+					height={97}
+					src={movie.poster}
+					draggable={false}
+					priority
+				/>
 			</Link>
-			<div className={styles.info}>
+			<div className={cl.info}>
 				<div>
-					<div className={styles.title}>{movie.title}</div>
-					<div className={styles.genres}>
+					<div className={cl.title}>{movie.title}</div>
+					<div className={cl.genres}>
 						{movie.genres.map(({ slug, name, _id }, idx) => (
 							<Link key={_id} href={getGenreUrl(slug)}>
-						{getGenresListEach(idx, movie.genres.length, name)}
+								{getGenresListEach(idx, movie.genres.length, name)}
 							</Link>
 						))}
 					</div>
 				</div>
-				<div className={styles.rating}>
+				<div className={cl.rating}>
 					<MaterialIcon name="MdStarRate" />
 					<span>{movie.rating.toFixed(1)}</span>
 				</div>

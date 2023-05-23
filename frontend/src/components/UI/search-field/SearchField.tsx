@@ -2,7 +2,7 @@ import { ChangeEvent, FC } from 'react'
 
 import { MaterialIcon } from '../icons/MaterialIcon'
 
-import styles from './SearchField.module.scss'
+import cl from './SearchField.module.scss'
 
 interface ISearchField {
 	searchTerm: string
@@ -11,7 +11,7 @@ interface ISearchField {
 
 const SearchField: FC<ISearchField> = ({ handleSearch, searchTerm }) => {
 	return (
-		<div className={styles.search}>
+		<div className={cl.search}>
 			<MaterialIcon name="MdSearch" />
 			<input placeholder="Search" value={searchTerm} onChange={handleSearch} />
 		</div>

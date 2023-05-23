@@ -1,11 +1,11 @@
 import cn from 'classnames'
 import { FC } from 'react'
 
-import styles from './AdminTable.module.scss'
+import cl from './AdminTable.module.scss'
 
 const AdminTableHeader: FC<{ headerItems: string[] }> = ({ headerItems }) => {
 	return (
-		<div className={cn(styles.item, styles.itemHeader)}>
+		<div className={cn(cl.item, cl.itemHeader)}>
 			{headerItems.map((value) => (
 				<div key={value}>{value}</div>
 			))}

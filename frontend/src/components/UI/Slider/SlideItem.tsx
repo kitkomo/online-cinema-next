@@ -2,7 +2,7 @@ import Image from 'next/image'
 import { useRouter } from 'next/router'
 import { FC } from 'react'
 
-import styles from './Slider.module.scss'
+import cl from './Slider.module.scss'
 import { ISlide } from './slider.types'
 
 interface ISlideItem {
@@ -14,11 +14,11 @@ const SlideItem: FC<ISlideItem> = ({ slide, buttonTitle = 'Watch' }) => {
 	const { push } = useRouter()
 
 	return (
-		<div className={styles.slide}>
+		<div className={cl.slide}>
 			{slide.bigPoster && (
 				<Image
 					layout="fill"
-					className={styles.image}
+					className={cl.image}
 					src={slide.bigPoster}
 					alt={slide.title}
 					draggable={false}
@@ -26,10 +26,10 @@ const SlideItem: FC<ISlideItem> = ({ slide, buttonTitle = 'Watch' }) => {
 					priority
 				/>
 			)}
-			<div className={styles.content}>
-				<div className={styles.heading}>{slide.title}</div>
-				<div className={styles.subHeading}>{slide.subTitle}</div>
-				<button className={styles.button} onClick={() => push(slide.link)}>
+			<div className={cl.content}>
+				<div className={cl.heading}>{slide.title}</div>
+				<div className={cl.subHeading}>{slide.subTitle}</div>
+				<button className={cl.button} onClick={() => push(slide.link)}>
 					{buttonTitle}
 				</button>
 			</div>

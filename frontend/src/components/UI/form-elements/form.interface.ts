@@ -1,10 +1,11 @@
 import { EditorProps, EditorState } from 'draft-js'
-import { ButtonHTMLAttributes, CSSProperties, InputHTMLAttributes } from 'react'
+import { ButtonHTMLAttributes, CSSProperties, InputHTMLAttributes, ReactNode } from 'react'
 import { FieldError } from 'react-hook-form'
 
 export interface IFieldProps {
 	placeholder: string
-	error?: FieldError | undefined
+	// error?: FieldError | undefined
+	error?: any
 }
 
 type TypeInputPropsField = InputHTMLAttributes<HTMLInputElement> & IFieldProps
@@ -15,12 +16,15 @@ export interface IUploadField {
 	image?: string
 	onChange: (...event: any[]) => void
 	placeholder: string
-	error?: FieldError
+	// error?: FieldError
+	error?: any
 	style?: CSSProperties
 	isNoImage?: boolean
 }
 
-export interface IButton extends ButtonHTMLAttributes<HTMLButtonElement> {}
+export interface IButton extends ButtonHTMLAttributes<HTMLButtonElement> {
+	children: ReactNode
+}
 
 type TypeEditorPropsField = EditorProps & IFieldProps
 

@@ -1,11 +1,12 @@
-import styles from './VideoPlayer.module.scss'
 import cn from 'classnames'
 import { FC } from 'react'
 
 import { useAuth } from '@/hooks/useAuth'
 
 import { MaterialIcon } from '../icons/MaterialIcon'
+
 import AuthPlaceholder from './AuthPlaceholder/AuthPlaceholder'
+import cl from './VideoPlayer.module.scss'
 import { useVideo } from './useVideo'
 import { IVideoPlayer } from './video.types'
 
@@ -15,36 +16,33 @@ const VideoPlayer: FC<IVideoPlayer> = ({ videoSource, slug }) => {
 
 	return (
 		<div
-			className={cn(styles.wrapper, {
-				'h-96': !user,
+			className={cn(cl.wrapper, {
+				'h-96': !user
 			})}
 		>
 			{user ? (
 				<>
 					<video
 						ref={videoRef}
-						className={styles.video}
+						className={cl.video}
 						src={`${videoSource}#t=8`}
 						preload="metadata"
 					/>
 
-					<div className={styles.progressBarContainer}>
+					<div className={cl.progressBarContainer}>
 						<div
 							style={{ width: `${video.progress}%` }}
-							className={styles.progressBar}
+							className={cl.progressBar}
 						/>
 					</div>
 
-					<div className={styles.controls}>
+					<div className={cl.controls}>
 						<div>
 							<button onClick={actions.revert}>
 								<MaterialIcon name="MdHistory" />
 							</button>
 
-							<button
-								onClick={actions.toggleVideo}
-								className={styles.playButton}
-							>
+							<button onClick={actions.toggleVideo} className={cl.playButton}>
 								<MaterialIcon
 									name={video.isPlaying ? 'MdPause' : 'MdPlayArrow'}
 								/>
@@ -54,14 +52,14 @@ const VideoPlayer: FC<IVideoPlayer> = ({ videoSource, slug }) => {
 								<MaterialIcon name="MdUpdate" />
 							</button>
 
-							<div className={styles.timeControls}>
-								<p className={styles.controlsTime}>
+							<div className={cl.timeControls}>
+								<p className={cl.controlsTime}>
 									{Math.floor(video.currentTime / 60) +
 										':' +
 										('0' + Math.floor(video.currentTime % 60)).slice(-2)}
 								</p>
 								<p> / </p>
-								<p className={styles.controlsTime}>
+								<p className={cl.controlsTime}>
 									{Math.floor(video.videoTime / 60) +
 										':' +
 										('0' + Math.floor(video.videoTime % 60)).slice(-2)}

@@ -8,7 +8,7 @@ import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css'
 
 import { ITextEditor } from './form.interface'
 
-import styles from './form.module.scss'
+import cl from './form.module.scss'
 
 const TextEditor: FC<ITextEditor> = ({
 	placeholder,
@@ -41,14 +41,14 @@ const TextEditor: FC<ITextEditor> = ({
 	}
 
 	return (
-		<div className={cn(styles.common, styles.editorWrapper, 'animate-fade')}>
+		<div className={cn(cl.common, cl.editorWrapper, 'animate-fade')}>
 			<label>
 				<span>{placeholder}</span>
 
-				<div className={styles.wrapper}>
+				<div className={cl.wrapper}>
 					<Editor
-						toolbarClassName={styles.toolbar}
-						editorClassName={styles.editor}
+						toolbarClassName={cl.toolbar}
+						editorClassName={cl.editor}
 						editorState={editorState}
 						onEditorStateChange={onEditorStateChange}
 						spellCheck
@@ -73,7 +73,7 @@ const TextEditor: FC<ITextEditor> = ({
 					/>
 				</div>
 
-				{error && <div className={styles.error}>{error.message}</div>}
+				{error && <div className={cl.error}>{error.message}</div>}
 			</label>
 		</div>
 	)

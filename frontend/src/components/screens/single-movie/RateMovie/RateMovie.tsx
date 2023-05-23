@@ -5,7 +5,7 @@ import AuthButton from '@/ui/video-player/AuthPlaceholder/AuthButton'
 
 import { useAuth } from '@/hooks/useAuth'
 
-import styles from './RateMovie.module.scss'
+import cl from './RateMovie.module.scss'
 import { useRateMovie } from './useRateMovie'
 
 const RateMovie: FC<{ slug: string; _id: string }> = ({ slug, _id }) => {
@@ -13,13 +13,13 @@ const RateMovie: FC<{ slug: string; _id: string }> = ({ slug, _id }) => {
 	const { handleClick, isSended, rating } = useRateMovie(_id)
 
 	return (
-		<div className={styles.wrapper}>
+		<div className={cl.wrapper}>
 			<h3>How do you like the movie?</h3>
 			<p>Ratings improve recommendations</p>
 			{user ? (
 				<>
 					{isSended ? (
-						<div className={styles.thanks}>Thanks for rating!</div>
+						<div className={cl.thanks}>Thanks for rating!</div>
 					) : (
 						<StarRating
 							name="star-rating"

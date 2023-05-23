@@ -8,19 +8,19 @@ import { getActorUrl, getGenreUrl } from '@/configs/url.config'
 
 import FavoriteButton from '../FavoriteButton/FavoriteButton'
 
-import styles from './Content.module.scss'
+import cl from './Content.module.scss'
 import ContentList from './ContentList/ContentList'
 
 const Content: FC<{ movie: IMovie }> = ({ movie }) => {
 	return (
-		<div className={styles.content}>
+		<div className={cl.content}>
 			<h1>{movie.title}</h1>
 			<FavoriteButton movieId={movie._id} />
-			<div className={styles.rating}>
+			<div className={cl.rating}>
 				<MaterialIcon name="MdStarRate" />
 				<span>{movie.rating.toFixed(1)}</span>
 			</div>
-			<div className={styles.details}>
+			<div className={cl.details}>
 				<span>{movie.parameters.year} · </span>
 				<span>{movie.parameters.country} · </span>
 				<span>{movie.parameters.duration} min.</span>
@@ -30,7 +30,7 @@ const Content: FC<{ movie: IMovie }> = ({ movie }) => {
 				links={movie.genres.map((g) => ({
 					link: getGenreUrl(g.slug),
 					title: g.name,
-					_id: g._id,
+					_id: g._id
 				}))}
 			/>
 			<ContentList
@@ -38,7 +38,7 @@ const Content: FC<{ movie: IMovie }> = ({ movie }) => {
 				links={movie.actors.map((a) => ({
 					link: getActorUrl(a.slug),
 					title: a.name,
-					_id: a._id,
+					_id: a._id
 				}))}
 			/>
 		</div>

@@ -4,26 +4,24 @@ import { FC } from 'react'
 
 import { IWidgetMovie } from '../../MoviesContainer/movie.types'
 
-import styles from './SearchList.module.scss'
+import cl from './SearchList.module.scss'
 
 const SearchList: FC<{ movies: IWidgetMovie[] }> = ({ movies }) => {
 	return (
-		<div className={styles.list}>
+		<div className={cl.list}>
 			{movies.length ? (
 				movies.map((movie) => (
 					<Link key={movie._id} href={`/movie/${movie.slug}`}>
-			
-							<Image
-								src={movie.poster || ''}
-								width={50}
-								height={50}
-								objectFit="cover"
-								objectPosition="top"
-								alt={movie.title}
-								draggable={false}
-							/>
-							<span>{movie.title}</span>
-		
+						<Image
+							src={movie.poster || ''}
+							width={50}
+							height={50}
+							objectFit="cover"
+							objectPosition="top"
+							alt={movie.title}
+							draggable={false}
+						/>
+						<span>{movie.title}</span>
 					</Link>
 				))
 			) : (

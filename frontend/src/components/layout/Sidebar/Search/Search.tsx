@@ -7,7 +7,7 @@ import { useDebounce } from '@/hooks/useDebounce'
 
 import { MovieService } from '@/services/movie/movie.service'
 
-import styles from './Search.module.scss'
+import cl from './Search.module.scss'
 import SearchList from './SearchList/SearchList'
 
 const Search: FC = () => {
@@ -19,7 +19,7 @@ const Search: FC = () => {
 		() => MovieService.getMovies(debouncedSearch),
 		{
 			select: ({ data }) => data,
-			enabled: !!debouncedSearch,
+			enabled: !!debouncedSearch
 		}
 	)
 
@@ -28,7 +28,7 @@ const Search: FC = () => {
 	}
 
 	return (
-		<div className={styles.wrapper}>
+		<div className={cl.wrapper}>
 			<SearchField searchTerm={searchTerm} handleSearch={handleSearch} />
 			{isSuccess && <SearchList movies={popularMovies || []} />}
 		</div>

@@ -1,11 +1,9 @@
-import { IGenreEditInput } from './genre-edit.interface'
-import { useGenreEdit } from './useGenreEdit'
 import dynamic from 'next/dynamic'
 import { FC } from 'react'
 import { Controller, SubmitHandler, useForm } from 'react-hook-form'
 import { stripHtml } from 'string-strip-html'
 
-import formStyles from '@/components/shared/admin/adminForm.module.scss'
+import formcl from '@/components/shared/admin/adminForm.module.scss'
 import SlugField from '@/components/ui/form-elements/SlugField/SlugField'
 import SkeletonLoader from '@/components/ui/skeleton-loader/SkeletonLoader'
 
@@ -17,12 +15,15 @@ import Heading from '@/ui/heading/Heading'
 import { Meta } from '@/utils/meta'
 import generateSlug from '@/utils/string/generateSlug'
 
+import { IGenreEditInput } from './genre-edit.interface'
+import { useGenreEdit } from './useGenreEdit'
+
 // "^[./]((?!scss).)*$",
 
 const DynamicTextEditor = dynamic(
 	() => import('@/ui/form-elements/TextEditor'),
 	{
-		ssr: false,
+		ssr: false
 	}
 )
 
@@ -33,9 +34,9 @@ const GenreEdit: FC = () => {
 		formState: { errors },
 		control,
 		setValue,
-		getValues,
+		getValues
 	} = useForm<IGenreEditInput>({
-		mode: 'onChange',
+		mode: 'onChange'
 	})
 
 	const { isLoading, onSubmit } = useGenreEdit(setValue)
@@ -44,15 +45,15 @@ const GenreEdit: FC = () => {
 		<Meta title="Edit genre">
 			<AdminNavigation />
 			<Heading title="Edit genre" />
-			<form onSubmit={handleSubmit(onSubmit)} className={formStyles.form}>
+			<form onSubmit={handleSubmit(onSubmit)} className={formcl.form}>
 				{isLoading ? (
 					<SkeletonLoader count={3} />
 				) : (
 					<>
-						<div className={formStyles.fields}>
+						<div className={formcl.fields}>
 							<Field
 								{...register('name', {
-									required: 'Name is required!',
+									required: 'Name is required!'
 								})}
 								placeholder="Name"
 								error={errors.name}
@@ -71,7 +72,7 @@ const GenreEdit: FC = () => {
 
 							<Field
 								{...register('icon', {
-									required: 'Icon is required!',
+									required: 'Icon is required!'
 								})}
 								placeholder="Icon"
 								error={errors.icon}
@@ -84,7 +85,7 @@ const GenreEdit: FC = () => {
 							defaultValue=""
 							render={({
 								field: { value, onChange },
-								fieldState: { error },
+								fieldState: { error }
 							}) => (
 								<DynamicTextEditor
 									placeholder="Description"
@@ -97,8 +98,8 @@ const GenreEdit: FC = () => {
 								validate: {
 									required: (v) =>
 										(v && stripHtml(v).result.length > 0) ||
-										'Description is required!',
-								},
+										'Description is required!'
+								}
 							}}
 						/>
 						<Button>Update</Button>

@@ -3,7 +3,7 @@ import { ChangeEvent, FC } from 'react'
 import SearchField from '../../search-field/SearchField'
 import AdminCreateButton from '../AdminCreateButton/AdminCreateButton'
 
-import styles from './AdminHeader.module.scss'
+import cl from './AdminHeader.module.scss'
 
 interface IAdminHeader {
 	onClick?: () => void
@@ -14,10 +14,10 @@ interface IAdminHeader {
 const AdminHeader: FC<IAdminHeader> = ({
 	onClick,
 	handleSearch,
-	searchTerm,
+	searchTerm
 }) => {
 	return (
-		<div className={styles.header}>
+		<div className={cl.header}>
 			<SearchField handleSearch={handleSearch} searchTerm={searchTerm} />
 			{onClick && <AdminCreateButton onClick={onClick} />}
 		</div>

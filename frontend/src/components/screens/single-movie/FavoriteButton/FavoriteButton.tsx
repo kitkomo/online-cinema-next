@@ -8,7 +8,7 @@ import { toastError } from '@/utils/api/withToastrErrorRedux'
 
 import { useFavorites } from '../../favorites/useFavorites'
 
-import styles from './FavoriteButton.module.scss'
+import cl from './FavoriteButton.module.scss'
 import HeartImage from './heart-animation.png'
 
 const FavoriteButton: FC<{ movieId: string }> = ({ movieId }) => {
@@ -33,15 +33,15 @@ const FavoriteButton: FC<{ movieId: string }> = ({ movieId }) => {
 			onSuccess() {
 				setIsSmashed(!isSmashed)
 				refetch()
-			},
+			}
 		}
 	)
 
 	return (
 		<button
 			onClick={() => mutateAsync()}
-			className={cn(styles.button, {
-				[styles.animate]: isSmashed,
+			className={cn(cl.button, {
+				[cl.animate]: isSmashed
 			})}
 			style={{ backgroundImage: `url(${HeartImage.src})` }}
 		/>

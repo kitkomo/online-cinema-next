@@ -1,7 +1,7 @@
-import { FC, Fragment } from 'react'
 import Link from 'next/link'
+import { FC, Fragment } from 'react'
 
-import styles from './ContentList.module.scss'
+import cl from './ContentList.module.scss'
 
 interface ILink {
 	_id: string
@@ -16,14 +16,12 @@ interface IContentList {
 
 const ContentList: FC<IContentList> = ({ name, links }) => {
 	return (
-		<div className={styles.list}>
-			<div className={styles.name}>{name}:</div>
-			<div className={styles.links}>
+		<div className={cl.list}>
+			<div className={cl.name}>{name}:</div>
+			<div className={cl.links}>
 				{links.slice(0, 3).map(({ link, title, _id }, idx) => (
 					<Fragment key={_id}>
-						<Link href={link}>
-							{title}
-						</Link>
+						<Link href={link}>{title}</Link>
 						{idx + 1 !== links.length ? ', ' : ''}
 					</Fragment>
 				))}

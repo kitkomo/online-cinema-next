@@ -1,11 +1,12 @@
-import { useUpload } from './useUpload'
 import cn from 'classnames'
 import Image from 'next/image'
 import { FC } from 'react'
 
 import SkeletonLoader from '../../skeleton-loader/SkeletonLoader'
 import { IUploadField } from '../form.interface'
-import styles from '../form.module.scss'
+import cl from '../form.module.scss'
+
+import { useUpload } from './useUpload'
 
 const UploadField: FC<IUploadField> = ({
 	placeholder,
@@ -14,20 +15,20 @@ const UploadField: FC<IUploadField> = ({
 	image,
 	folder,
 	onChange,
-	isNoImage = false,
+	isNoImage = false
 }) => {
 	const { uploadImage, isLoading } = useUpload(onChange, folder)
 
 	return (
-		<div className={cn(styles.field, styles.uploadField)} style={style}>
-			<div className={styles.uploadFlex}>
+		<div className={cn(cl.field, cl.uploadField)} style={style}>
+			<div className={cl.uploadFlex}>
 				<label>
 					<span>{placeholder}</span>
 					<input type="file" onChange={uploadImage} />
-					{error && <div className={styles.error}>{error.message}</div>}
+					{error && <div className={cl.error}>{error.message}</div>}
 				</label>
 				{!isNoImage && (
-					<div className={styles.uploadImageContainer}>
+					<div className={cl.uploadImageContainer}>
 						{isLoading ? (
 							<SkeletonLoader count={1} className="w-full h-full" />
 						) : (

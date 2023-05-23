@@ -1,4 +1,3 @@
-import { IProfileInput } from './profile.interface'
 import { FC } from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import { useMutation, useQuery } from 'react-query'
@@ -14,12 +13,13 @@ import { UserService } from '@/services/user/user.service'
 import { toastError } from '@/utils/api/withToastrErrorRedux'
 import { Meta } from '@/utils/meta'
 
-import styles from './Profile.module.scss'
+import cl from './Profile.module.scss'
+import { IProfileInput } from './profile.interface'
 
 const Profile: FC = () => {
 	const { handleSubmit, register, formState, setValue } =
 		useForm<IProfileInput>({
-			mode: 'onChange',
+			mode: 'onChange'
 		})
 
 	const { isLoading } = useQuery('profile', () => UserService.getProfile(), {
@@ -28,7 +28,7 @@ const Profile: FC = () => {
 		},
 		onError(error) {
 			toastError(error, 'Get profile')
-		},
+		}
 	})
 
 	const { mutateAsync } = useMutation(
@@ -40,7 +40,7 @@ const Profile: FC = () => {
 			},
 			onSuccess() {
 				toastr.success('Update profile', 'update was successful')
-			},
+			}
 		}
 	)
 
@@ -51,7 +51,7 @@ const Profile: FC = () => {
 	return (
 		<Meta title="Profile">
 			<Heading title="Profile" />
-			<form onSubmit={handleSubmit(onSubmit)} className={styles.form}>
+			<form onSubmit={handleSubmit(onSubmit)} className={cl.form}>
 				{isLoading ? (
 					<SkeletonLoader count={2} />
 				) : (
