@@ -1,9 +1,9 @@
-import cn from 'classnames'
 import { FC } from 'react'
+import cn from 'classnames'
 
-import MaterialIcon from '../../MaterialIcon'
+import { MaterialIcon } from '../../icons/MaterialIcon'
 
-import cl from './SlideArrow.module.scss'
+import styles from './SlideArrow.module.scss'
 
 interface ISlideArrow {
 	variant: 'left' | 'right'
@@ -12,12 +12,13 @@ interface ISlideArrow {
 
 const SlideArrow: FC<ISlideArrow> = ({ variant, clickHandler }) => {
 	const isLeft = variant === 'left'
+
 	return (
 		<button
 			onClick={clickHandler}
-			className={cn(cl.arrow, {
-				[cl.left]: isLeft,
-				[cl.right]: !isLeft
+			className={cn(styles.arrow, {
+				[styles.left]: isLeft,
+				[styles.right]: !isLeft,
 			})}
 		>
 			<MaterialIcon name={isLeft ? 'MdChevronLeft' : 'MdChevronRight'} />

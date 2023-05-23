@@ -1,32 +1,35 @@
 import { FC } from 'react'
 
-import Gallery from '@/components/UI/Gallery/Gallery'
-import Slider from '@/components/UI/Slider/Slider'
-import Heading from '@/components/UI/heading/Heading'
-import SubHeading from '@/components/UI/heading/SubHeading'
+import Gallery from '@/ui/gallery/Gallery'
+import Heading from '@/ui/heading/Heading'
+import SubHeading from '@/ui/heading/SubHeading'
+import Slider from '@/ui/slider/Slider'
 
-import Meta from '@/utils/meta/Meta'
+import { Meta } from '@/utils/meta'
 
-import { IHome } from './home.interface'
+import { IHome } from './home.types'
 
-const Home: FC<IHome> = ({ slides, actors, trendingMovies }) => {
+const Home: FC<IHome> = ({ slides, trendingMovies, actors }) => {
 	return (
 		<Meta
 			title="Watch movies online"
-			description="Watch movies online in best quality Full HD 720 and 1080. The best movies is already in the Netflix online cinema!"
+			description="Watch MovieApp movies and TV shows online or stream right to your browser."
 		>
 			<Heading
 				title="Watch movies online"
-				className="text-gray-300 mb-8 text-xl"
+				className="text-gray-500 mb-8 text-xl"
 			/>
+
 			{slides.length && <Slider slides={slides} />}
+
 			<div className="my-10">
 				<SubHeading title="Trending now" />
-				{trendingMovies.length && <Gallery items={trendingMovies} /> }
+				{trendingMovies.length && <Gallery items={trendingMovies} />}
 			</div>
-			<div className="my-10">
+
+			<div>
 				<SubHeading title="Best actors" />
-				{trendingMovies.length && <Gallery items={actors} /> }
+				{actors.length && <Gallery items={actors} />}
 			</div>
 		</Meta>
 	)

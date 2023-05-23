@@ -1,14 +1,15 @@
 import { FC } from 'react'
 
-import Search from './Search/Search'
-import cl from './Sidebar.module.scss'
 import MoviesContainer from './MoviesContainer/MoviesContainer'
+import Search from './Search/Search'
+
+import styles from './Sidebar.module.scss'
 
 const Sidebar: FC = () => {
 	return (
-		<div className={cl.sidebar}>
+		<div className={styles.sidebar}>
 			<Search />
-			<MoviesContainer/>
+			<MoviesContainer />
 		</div>
 	)
 }

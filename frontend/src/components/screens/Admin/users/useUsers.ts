@@ -2,14 +2,14 @@ import { ChangeEvent, useMemo, useState } from 'react'
 import { useMutation, useQuery } from 'react-query'
 import { toastr } from 'react-redux-toastr'
 
-import { ITableItem } from '@/components/UI/AdminTable/AdminTable/admin-table.interface'
+import { ITableItem } from '@/components/ui/admin-table/AdminTable/admin-table.interface'
 
 import { useDebounce } from '@/hooks/useDebounce'
 
-import { UserService } from '@/services/user.service'
+import { UserService } from '@/services/user/user.service'
 
+import { toastError } from '@/utils/api/withToastrErrorRedux'
 import { convertMongoDate } from '@/utils/date/convertMongoDate'
-import { toastrError } from '@/utils/toastr.error'
 
 import { getAdminUrl } from '@/configs/url.config'
 
@@ -18,37 +18,38 @@ export const useUsers = () => {
 	const debouncedSearch = useDebounce(searchTerm, 500)
 
 	const queryData = useQuery(
-		['users-list', debouncedSearch],
-		() => UserService.getAll(debouncedSearch),
+		['user list', debouncedSearch],
+		() => UserService.getUsers(debouncedSearch),
 		{
 			select: ({ data }) =>
 				data.map(
 					(user): ITableItem => ({
 						_id: user._id,
-						editUrl: getAdminUrl(`users/edit/${user._id}`),
-						items: [user.email, convertMongoDate(user.createdAt)]
+						editUrl: getAdminUrl(`user/edit/${user._id}`),
+						items: [user.email, convertMongoDate(user.createdAt)],
 					})
 				),
-			onError: (error) => {
-				toastrError(error, 'User list')
-			}
+			onError(error) {
+				toastError(error, 'user list')
+			},
 		}
 	)
 
-	const handleSearch = (e: ChangeEvent<HTMLInputElement>) =>
+	const handleSearch = (e: ChangeEvent<HTMLInputElement>) => {
 		setSearchTerm(e.target.value)
+	}
 
 	const { mutateAsync: deleteAsync } = useMutation(
-		'delete-user',
+		'delete user',
 		(userId: string) => UserService.deleteUser(userId),
 		{
-			onError: (error) => {
-				toastrError(error, 'Delete user')
+			onError(error) {
+				toastError(error, 'Delete user')
 			},
-			onSuccess: () => {
-				toastr.success('Delete user', 'user successfully deleted')
+			onSuccess() {
+				toastr.success('Delete user', 'delete was successful')
 				queryData.refetch()
-			}
+			},
 		}
 	)
 
@@ -57,7 +58,7 @@ export const useUsers = () => {
 			handleSearch,
 			...queryData,
 			searchTerm,
-			deleteAsync
+			deleteAsync,
 		}),
 		[queryData, searchTerm, deleteAsync]
 	)

@@ -2,35 +2,34 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { FC } from 'react'
 
-import { IMovie } from '@/shared/types/movie.types'
+import { IWidgetMovie } from '../../MoviesContainer/movie.types'
 
-import { getMovieUrl } from '@/configs/url.config'
+import styles from './SearchList.module.scss'
 
-import cl from './SearchList.module.scss'
-
-const SearchList: FC<{ movies: IMovie[] }> = ({ movies }) => {
+const SearchList: FC<{ movies: IWidgetMovie[] }> = ({ movies }) => {
 	return (
-		<ul className={cl.list}>
+		<div className={styles.list}>
 			{movies.length ? (
-				movies.map((item) => (
-					<li key={item._id}>
-						<Link href={getMovieUrl(item.slug)}>
+				movies.map((movie) => (
+					<Link key={movie._id} href={`/movie/${movie.slug}`}>
+			
 							<Image
-								src={item.poster}
+								src={movie.poster || ''}
 								width={50}
 								height={50}
-								alt={item.title}
-								className="object-cover object-top"
+								objectFit="cover"
+								objectPosition="top"
+								alt={movie.title}
 								draggable={false}
 							/>
-							<span>{item.title}</span>
-						</Link>
-					</li>
+							<span>{movie.title}</span>
+		
+					</Link>
 				))
 			) : (
-				<li className="text-white text-center my-4">Movies not found</li>
+				<div className="text-white text-center my-4">Movies not found!</div>
 			)}
-		</ul>
+		</div>
 	)
 }
 

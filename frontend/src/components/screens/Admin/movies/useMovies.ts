@@ -1,71 +1,76 @@
+import { useRouter } from 'next/router'
 import { ChangeEvent, useMemo, useState } from 'react'
 import { useMutation, useQuery } from 'react-query'
 import { toastr } from 'react-redux-toastr'
 
-import { ITableItem } from '@/components/UI/AdminTable/AdminTable/admin-table.interface'
+import { ITableItem } from '@/ui/admin-table/AdminTable/admin-table.interface'
 
 import { useDebounce } from '@/hooks/useDebounce'
 
-import { MovieService } from '@/services/movie.service'
+import { MovieService } from '@/services/movie/movie.service'
 
-import { convertMongoDate } from '@/utils/date/convertMongoDate'
-import { toastrError } from '@/utils/toastr.error'
+import { toastError } from '@/utils/api/withToastrErrorRedux'
+import { getGenresList } from '@/utils/movie/getGenresList'
 
 import { getAdminUrl } from '@/configs/url.config'
-import { getGenresList } from '@/utils/movie/getGenresListEach'
-import { useRouter } from 'next/router'
 
 export const useMovies = () => {
 	const [searchTerm, setSearchTerm] = useState('')
 	const debouncedSearch = useDebounce(searchTerm, 500)
-	const {push} = useRouter()
 
 	const queryData = useQuery(
-		['movies-list', debouncedSearch],
-		() => MovieService.getAll(debouncedSearch),
+		['movie list', debouncedSearch],
+		() => MovieService.getMovies(debouncedSearch),
 		{
 			select: ({ data }) =>
 				data.map(
 					(movie): ITableItem => ({
 						_id: movie._id,
-						editUrl: `movie/edit/${movie._id}`,
-						items: [movie.title, getGenresList(movie.genres),String(movie.rating)]
+						editUrl: getAdminUrl(`movie/edit/${movie._id}`),
+						items: [
+							movie.title,
+							getGenresList(movie.genres),
+							String(movie.rating),
+						],
 					})
 				),
-			onError: (error) => {
-				toastrError(error, 'Movie list')
-			}
+			onError(error) {
+				toastError(error, 'movie list')
+			},
 		}
 	)
+
+	const handleSearch = (e: ChangeEvent<HTMLInputElement>) => {
+		setSearchTerm(e.target.value)
+	}
+
+	const { push } = useRouter()
 
 	const { mutateAsync: createAsync } = useMutation(
-		'create-genre',
-		() => MovieService.createMovie(),
+		'create movie',
+		() => MovieService.create(),
 		{
-			onError: (error) => {
-				toastrError(error, 'Create genre')
+			onError(error) {
+				toastError(error, 'Create movie')
 			},
-			onSuccess: ({data: _id}) => {
-				toastr.success('Create movie', 'movie successfully created')
-				push(`movie/edit/${_id}`)
-			}
+			onSuccess({ data: _id }) {
+				toastr.success('Create movie', 'create was successful')
+				push(getAdminUrl(`movie/edit/${_id}`))
+			},
 		}
 	)
 
-	const handleSearch = (e: ChangeEvent<HTMLInputElement>) =>
-		setSearchTerm(e.target.value)
-
 	const { mutateAsync: deleteAsync } = useMutation(
-		'delete-movie',
-		(userId: string) => MovieService.deleteMovie(userId),
+		'delete movie',
+		(movieId: string) => MovieService.delete(movieId),
 		{
-			onError: (error) => {
-				toastrError(error, 'Delete movie')
+			onError(error) {
+				toastError(error, 'Delete movie')
 			},
-			onSuccess: () => {
-				toastr.success('Delete movie', 'movie successfully deleted')
+			onSuccess() {
+				toastr.success('Delete movie', 'delete was successful')
 				queryData.refetch()
-			}
+			},
 		}
 	)
 
@@ -75,7 +80,7 @@ export const useMovies = () => {
 			...queryData,
 			searchTerm,
 			deleteAsync,
-			createAsync
+			createAsync,
 		}),
 		[queryData, searchTerm, deleteAsync, createAsync]
 	)

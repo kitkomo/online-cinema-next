@@ -1,4 +1,4 @@
-import { IUser } from "@/shared/types/user.types"
+import { IUser } from '@/shared/types/user.types'
 
 export interface IUserState {
 	email: string
@@ -10,12 +10,12 @@ export interface ITokens {
 	refreshToken: string
 }
 
-export interface IInitialState {
+export interface IUserInitialState {
 	user: IUserState | null
 	isLoading: boolean
 }
 
-export interface IEmailPassword {
+export interface InterfaceEmailPassword {
 	email: string
 	password: string
 }

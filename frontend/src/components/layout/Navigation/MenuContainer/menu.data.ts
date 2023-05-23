@@ -1,16 +1,34 @@
-import { IMenu } from './menu.interface'
+import { IMenu } from './menu.types'
 
-export const staticMenu: IMenu = {
+const firstMenu: IMenu = {
 	title: 'Menu',
 	items: [
-		{ icon: 'MdHome', link: '/', title: 'Home' },
-		{ icon: 'MdExplore', link: '/discovery', title: 'Discovery' },
-		{ icon: 'MdRefresh', link: '/new-movies', title: 'New movies' },
-		{ icon: 'MdLocalFireDepartment', link: '/trending', title: 'Trending now' }
-	]
+		{
+			icon: 'MdHome',
+			link: '/',
+			title: 'Home',
+		},
+		{
+			icon: 'MdExplore',
+			link: '/genres',
+			title: 'Discovery',
+		},
+		{
+			icon: 'MdRefresh',
+			link: '/fresh',
+			title: 'Fresh movies',
+		},
+		{
+			icon: 'MdLocalFireDepartment',
+			link: '/trending',
+			title: 'Trending now',
+		},
+	],
 }
 
-export const userMenu: IMenu = {
+const userMenu: IMenu = {
 	title: 'General',
-	items: []
+	items: [],
 }
+
+export const menus: IMenu[] = [firstMenu, userMenu]

@@ -1,27 +1,37 @@
+import { useMovies } from './useMovies'
 import { FC } from 'react'
 
-import AdminNavigation from '@/components/UI/AdminNavigation/AdminNavigation'
-import AdminHeader from '@/components/UI/AdminTable/AdminHeader/AdminHeader'
-import AdminTable from '@/components/UI/AdminTable/AdminTable/AdminTable'
-import Heading from '@/components/UI/heading/Heading'
+import AdminNavigation from '@/ui/admin-navigation/AdminNavigation'
+import AdminHeader from '@/ui/admin-table/AdminHeader/AdminHeader'
+import AdminTable from '@/ui/admin-table/AdminTable/AdminTable'
+import Heading from '@/ui/heading/Heading'
 
-import Meta from '@/utils/meta/Meta'
-
-import { useMovies } from './useMovies'
+import { Meta } from '@/utils/meta'
 
 const MovieList: FC = () => {
-	const { handleSearch, searchTerm, isLoading, data, deleteAsync, createAsync } = useMovies()
+	const {
+		createAsync,
+		data,
+		isLoading,
+		deleteAsync,
+		searchTerm,
+		handleSearch,
+	} = useMovies()
 
 	return (
 		<Meta title="Movies">
 			<AdminNavigation />
 			<Heading title="Movies" />
-			<AdminHeader handleSearch={handleSearch} searchTerm={searchTerm} onClick={createAsync} />
+			<AdminHeader
+				onClick={createAsync}
+				handleSearch={handleSearch}
+				searchTerm={searchTerm}
+			/>
 			<AdminTable
+				tableItems={data || []}
+				headerItems={['Title', 'Genres', 'Rating']}
 				isLoading={isLoading}
 				removeHandler={deleteAsync}
-				headerItems={['Movie', 'Genre', 'Rating']}
-				tableItems={data || []}
 			/>
 		</Meta>
 	)

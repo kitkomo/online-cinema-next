@@ -2,28 +2,26 @@ import cn from 'classnames'
 import { FC } from 'react'
 import { useQuery } from 'react-query'
 
-import SkeletonLoader from '@/components/UI/SkeletonLoader'
+import SkeletonLoader from '@/components/ui/skeleton-loader/SkeletonLoader'
 
-import { AdminService } from '@/services/admin.service'
+import { AdminService } from '@/services/admin/admin.service'
 
-import cl from './../Admin.module.scss'
+import styles from '../Admin.module.scss'
 
 const CountUsers: FC = () => {
-	const { isLoading, data } = useQuery('count-users', () =>
+	const { isLoading, data: response } = useQuery('Count users', () =>
 		AdminService.getCountUsers()
 	)
 
 	return (
-		<div className={cn(cl.block, cl.countUsers)}>
+		<div className={cn(styles.block, styles.countUsers)}>
 			<div>
 				{isLoading ? (
 					<SkeletonLoader />
 				) : (
-					<div className={cl.number}>
-						{data?.data}
-						<div className={cl.description}>users</div>
-					</div>
+					<div className={styles.number}>{response?.data}</div>
 				)}
+				<div className={styles.description}>users</div>
 			</div>
 		</div>
 	)

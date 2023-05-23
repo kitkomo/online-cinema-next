@@ -1,15 +1,15 @@
 import Head from 'next/head'
-import NextProgressbar from 'nextjs-progressbar'
-import { FC, ReactNode } from 'react'
+import NextProgressBar from 'nextjs-progressbar'
+import { FC } from 'react'
 
 import { accentColor } from '@/configs/constants'
 
-import FavIcons from './FavIcons'
+import Favicons from './Favicons'
 
-const HeadProvider: FC<{ children: ReactNode }> = ({ children }) => {
+const HeadProvider: FC = ({ children }) => {
 	return (
 		<>
-			<NextProgressbar
+			<NextProgressBar
 				color={accentColor}
 				startPosition={0.3}
 				stopDelayMs={200}
@@ -22,7 +22,7 @@ const HeadProvider: FC<{ children: ReactNode }> = ({ children }) => {
 					content="width=device-width, initial-scale=1, maximum-scale=1.0"
 				/>
 
-				<FavIcons />
+				<Favicons />
 
 				<meta name="theme-color" content={'#181B1E'} />
 				<meta name="msapplication-navbutton-color" content={'#181B1E'} />

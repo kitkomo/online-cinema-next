@@ -1,25 +1,26 @@
 import { FC } from 'react'
+import ReactSelect, { OnChangeValue } from 'react-select'
 import makeAnimated from 'react-select/animated'
-import { OnChangeValue } from 'react-select/dist/declarations/src'
-import ReactSelect from 'react-select'
-import cl from './Select.module.scss'
+
+import formStyles from '../form-elements/form.module.scss'
+
+import styles from './Select.module.scss'
 import { IOption, ISelect } from './select.interface'
-import formStyles from './../formElements/form.module.scss'
 
 const animatedComponents = makeAnimated()
 
 const Select: FC<ISelect> = ({
-	field,
 	placeholder,
-	options,
 	error,
 	isMulti,
-	isLoading
+	options,
+	field,
+	isLoading,
 }) => {
 	const onChange = (newValue: OnChangeValue<IOption, boolean>) => {
 		field.onChange(
 			isMulti
-				? (newValue as IOption[]).map((item) => item.value)
+				? (newValue as IOption[]).map((item: IOption) => item.value)
 				: (newValue as IOption).value
 		)
 	}
@@ -28,25 +29,28 @@ const Select: FC<ISelect> = ({
 		if (field.value) {
 			return isMulti
 				? options.filter((option) => field.value.indexOf(option.value) >= 0)
-				: options.find((option) => (option.value = field.value))
-		} else return isMulti ? [] : ''
+				: options.find((option) => option.value === field.value)
+		} else {
+			return isMulti ? [] : ('' as any)
+		}
 	}
 
 	return (
-		<div className={cl.selectContainer}>
+		<div className={styles.selectContainer}>
 			<label>
 				<span>{placeholder}</span>
 				<ReactSelect
-					classNamePrefix='custom-select'
+					classNamePrefix="custom-select"
+					placeholder={''}
 					options={options}
 					value={getValue()}
-					isMulti={isMulti}
 					onChange={onChange}
+					isMulti={isMulti}
 					components={animatedComponents}
 					isLoading={isLoading}
 				/>
-				{error && <div className={formStyles.error}>{error.message}</div>}
 			</label>
+			{error && <div className={formStyles.error}>{error.message}</div>}
 		</div>
 	)
 }

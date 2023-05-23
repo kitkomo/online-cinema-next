@@ -1,11 +1,9 @@
-import Profile from "@/components/screens/Profile/Profile"
-import { NextPageAuth } from "@/shared/types/auth.types"
+import Profile from '@/components/screens/profile/Profile'
 
+import { NextPageAuth } from '@/shared/types/auth.types'
 
 const ProfilePage: NextPageAuth = () => {
-	return (
-		<Profile/>
-	)
+	return <Profile />
 }
 
 ProfilePage.isOnlyUser = true

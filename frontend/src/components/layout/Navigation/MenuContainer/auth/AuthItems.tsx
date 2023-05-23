@@ -10,6 +10,7 @@ import LogoutButton from './LogoutButton'
 
 const AuthItems: FC = () => {
 	const { user } = useAuth()
+
 	return (
 		<>
 			{user ? (
@@ -18,26 +19,21 @@ const AuthItems: FC = () => {
 						item={{
 							icon: 'MdSettings',
 							link: '/profile',
-							title: 'Profile'
+							title: 'Profile',
 						}}
 					/>
 					<LogoutButton />
 				</>
 			) : (
-				<MenuItem
-					item={{
-						icon: 'MdLogin',
-						link: '/auth',
-						title: 'Login'
-					}}
-				/>
+				<MenuItem item={{ icon: 'MdLogin', link: '/auth', title: 'Login' }} />
 			)}
+
 			{user?.isAdmin && (
 				<MenuItem
 					item={{
 						icon: 'MdOutlineLock',
-						link: `/${getAdminHomeUrl()}`,
-						title: 'Admin panel'
+						link: getAdminHomeUrl(),
+						title: 'Admin panel',
 					}}
 				/>
 			)}

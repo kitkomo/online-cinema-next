@@ -1,26 +1,28 @@
-import { errorCatch } from '@/api/api.helpers'
-import { IGalleryItem } from '@/components/UI/Gallery/gallery.interface'
-import { ISlide } from '@/components/UI/Slider/slider.interface'
-import Home from '@/components/screens/Home/Home'
+import { errorCatch } from 'api/api.helpers'
+import type { GetStaticProps, NextPage } from 'next'
 
-import { IHome } from '@/components/screens/Home/home.interface'
+import Home from '@/screens/home/Home'
+import { IHome } from '@/screens/home/home.types'
+
+import { IGalleryItem } from '@/components/ui/gallery/gallery.types'
+import { ISlide } from '@/components/ui/slider/slider.types'
+
+import { ActorService } from '@/services/actor/actor.service'
+import { MovieService } from '@/services/movie/movie.service'
+
+import { getGenresList } from '@/utils/movie/getGenresList'
+
 import { getActorUrl, getMovieUrl } from '@/configs/url.config'
-import { ActorService } from '@/services/actor.service'
-import { MovieService } from '@/services/movie.service'
-import { getGenresList } from '@/utils/movie/getGenresListEach'
-import { GetStaticProps, NextPage } from 'next'
 
-const HomePage: NextPage<IHome> = ({actors, slides, trendingMovies}) => {
-	return (
-		<Home actors={actors} slides={slides} trendingMovies={trendingMovies}/>
-	)
+const HomePage: NextPage<IHome> = ({slides, actors, trendingMovies}) => {
+	return <Home slides={slides} actors={actors} trendingMovies={trendingMovies} />
 }
 
 export const getStaticProps: GetStaticProps = async () => {
 	try {
-		const { data: movies } = await MovieService.getAll()
+		const { data: movies } = await MovieService.getMovies()
 		const { data: dataActors } = await ActorService.getAll()
-		const dataTrendingMovies = await MovieService.getMostPopular()
+		const datatTrendingMovies = await MovieService.getMostPopularMovies()
 
 		const slides: ISlide[] = movies.slice(0, 3).map((m) => ({
 			_id: m._id,
@@ -33,19 +35,19 @@ export const getStaticProps: GetStaticProps = async () => {
 		const actors: IGalleryItem[] = dataActors.slice(0, 7).map((a) => ({
 			name: a.name,
 			posterPath: a.photo,
-			link: getActorUrl(a.slug),
+			url: getActorUrl(a.slug),
 			content: {
 				title: a.name,
 				subTitle: `+${a.countMovies} movies`,
 			},
 		}))
 
-		const trendingMovies: IGalleryItem[] = dataTrendingMovies
+		const trendingMovies: IGalleryItem[] = datatTrendingMovies
 			.slice(0, 7)
 			.map((m) => ({
 				name: m.title,
 				posterPath: m.poster,
-				link: getMovieUrl(m.slug),
+				url: getMovieUrl(m.slug),
 			}))
 
 		return {

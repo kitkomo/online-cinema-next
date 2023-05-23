@@ -1,4 +1,4 @@
-import { TypeMaterialIconName } from './icon.types'
+import { TypeMaterialIconName } from './icons.types'
 
 export interface IParameters {
 	year: number

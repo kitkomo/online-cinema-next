@@ -1,11 +1,11 @@
-import ActorEdit from '@/components/screens/Admin/actorsEdit/ActorEdit'
+import ActorEdit from '@/screens/admin/actor/ActorEdit'
+
 import { NextPageAuth } from '@/shared/types/auth.types'
 
 const ActorEditPage: NextPageAuth = () => {
-	return <ActorEdit/>
+	return <ActorEdit />
 }
 
 ActorEditPage.isOnlyAdmin = true
 
 export default ActorEditPage
- 

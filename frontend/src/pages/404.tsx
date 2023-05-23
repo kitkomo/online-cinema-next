@@ -1,14 +1,10 @@
-import Heading from "@/components/UI/heading/Heading"
-import Meta from "@/utils/meta/Meta"
-import { NextPage } from "next"
+import Heading from '@/components/ui/heading/Heading'
+import { Meta } from '@/utils/meta'
 
-
-const NotFound: NextPage = () => {
+export default function Error404() {
 	return (
 		<Meta title='Page not found'>
-			<Heading title='404 - Page not found'/>
+			<Heading title='404 - Page Not Found' />
 		</Meta>
 	)
 }
-
-export default NotFound
