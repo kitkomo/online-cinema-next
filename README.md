@@ -1,9 +1,6 @@
 # Netflix-by-kitkomo
 Netflix copy made by kitkomo
 
-`Note`: Unfortunately I can not show you this project...at least for now(( Discovered that heroku has stopped free tiers for students. After time I'll try to migrate my backend to Next.js API folder to publish project on a Vercel.
---- 
-
 To start a project provide `.env` file for each part - frontend and backend
 
 ## Frontend
