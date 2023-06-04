@@ -1,4 +1,3 @@
-# Netflix-by-kitkomo
 Netflix copy made by kitkomo
 
 To start a project provide `.env` file for each part - frontend and backend
